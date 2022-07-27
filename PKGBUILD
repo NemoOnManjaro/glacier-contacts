@@ -1,43 +1,33 @@
 # Maintainer: Chupligin Sergey (NeoChapay) <neochapay@gmail.com>
 
-_host="github.com"
-_project=nemomobile-ux
-_basename=glacier-contacts
-_branch=master
-
-_gitname=$_basename
-pkgname=$_basename-git
-
-pkgver=0.8.r82.gc375cb5
-
+pkgname=galcier-contacts
+pkgver=0.8.1
 pkgrel=1
 pkgdesc="QML based contacts application for nemomobile"
 arch=('x86_64' 'aarch64')
-url="https://$_host/$_project/$_gitname#branch=$_branch"
+url="https://github.com/nemomobile-ux/glacier-contacts"
 license=('BSD-3-Clause')
-depends=('nemo-qml-plugin-thumbnailer-git' 'nemo-qml-plugin-contacts-git' 'nemo-qml-plugin-folderlistmodel-git' 'glacier-gallery-git' 'glacier-filemuncher-git' 'contactsd-git' 'nemo-qml-plugin-dbus' 'qt5-glacier-app-git')
-makedepends=('git' 'cmake' 'qt5-tools')
-provides=("${pkgname%-git}")
-conflicts=("${pkgname%-git}")
-source=("${pkgname}::git+${url}")
-sha256sums=('SKIP')
+depends=('nemo-qml-plugin-thumbnailer'
+	'nemo-qml-plugin-contacts'
+	'nemo-qml-plugin-folderlistmodel'
+	'glacier-gallery'
+	'glacier-filemuncher'
+	'contactsd'
+	'nemo-qml-plugin-dbus'
+	'qt5-glacier-app')
+makedepends=( 'cmake' 'qt5-tools')
+source=("${url}/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('54df07b97309a19d10ad1acd29b2191339d80d25720322ce80a277dbf44ccdd5')
 
-pkgver() {
-  cd "${srcdir}/${pkgname}"
-  ( set -o pipefail
-    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-  ) 2>/dev/null
-}
 
 build() {
+    cd cd $pkgname-$pkgver
     cmake \
-        -B "${pkgname}/build" \
-        -S "${pkgname}" \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr'
-    make -C "${pkgname}/build" all
+    make  all
 }
 
 package() {
-    make -C "${srcdir}/${pkgname}/build" DESTDIR="$pkgdir" install
+    cd $pkgname-$pkgver
+    make DESTDIR="$pkgdir" install
 }
