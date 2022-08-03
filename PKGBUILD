@@ -21,7 +21,7 @@ sha256sums=('54df07b97309a19d10ad1acd29b2191339d80d25720322ce80a277dbf44ccdd5')
 
 
 build() {
-    cd cd $pkgname-$pkgver
+    cd $pkgname-$pkgver
     cmake \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr'
     make  all
