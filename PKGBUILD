@@ -1,6 +1,6 @@
 # Maintainer: Chupligin Sergey (NeoChapay) <neochapay@gmail.com>
 
-pkgname=galcier-contacts
+pkgname=glacier-contacts
 pkgver=0.8.1
 pkgrel=1
 pkgdesc="QML based contacts application for nemomobile"
