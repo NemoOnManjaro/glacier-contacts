@@ -14,7 +14,7 @@ depends=('nemo-qml-plugin-thumbnailer'
 	'glacier-filemuncher>=0.4'
 	'nemo-qml-plugin-dbus'
 	'qt6-glacier-app')
-makedepends=( 'cmake' 'qt6-tools')
+makedepends=( 'cmake' 'qt6-tools' 'clang')
 source=("${url}/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('e8383089b3ee8339c5ec72df62baf662230461d31bbda8ce77e6d0973cd713ba')
 
